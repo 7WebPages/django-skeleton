@@ -8,3 +8,6 @@ logutils==0.3.3
 South==0.8.4
 django-extensions
 django-debug-toolbar
+webtest
+django-webtest
+model_mommy
