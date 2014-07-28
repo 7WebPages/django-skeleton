@@ -10,3 +10,4 @@ django-extensions
 django-debug-toolbar
 webtest
 django-webtest
+model_mommy
