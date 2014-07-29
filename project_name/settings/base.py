@@ -248,6 +248,7 @@ LOGGING = {
 }
 ########## END LOGGING CONFIGURATION
 
+CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
