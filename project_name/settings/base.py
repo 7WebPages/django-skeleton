@@ -198,6 +198,7 @@ DJANGO_APPS = (
     'django_extensions',
     'south',
     'pure_pagination',
+    'crispy_forms',
 )
 
 # DEBUG-specific apps
