@@ -1,7 +1,5 @@
 """
-Management utility to create or update default site.
-based on
-https://github.com/peiwei/pinax/blob/master/pinax/apps/site_default/management/commands/createdefaultsite.py
+Management utility to new social appps for django-allauth.
 """
 
 from optparse import make_option
