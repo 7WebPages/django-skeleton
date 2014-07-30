@@ -12,3 +12,4 @@ webtest
 django-webtest
 model_mommy
 django-crispy-forms
+django-constance[database]
