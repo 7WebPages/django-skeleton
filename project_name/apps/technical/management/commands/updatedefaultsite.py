@@ -28,30 +28,31 @@ def is_valid_displayname(value):
 
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
-        make_option('--sitedomainname', dest='domainname', default=None,
+        make_option('--domainname', dest='domainname', default=None,
             help='Specifies the site domain name.'),
-        make_option('--sitedisplayname', dest='displayname', default=None,
+        make_option('--displayname', dest='displayname', default=None,
             help='Specifies the site display name.'),
     )
-    help = 'Used to create a default site. Provide both --sitedomainname and --sitedisplayname. Remember double quoting display name if necessary.'
+    help = ('Used to create a default site.'
+            ' Provide both --domainname and --displayname (optional).'
+            ' Remember double quoting display name if necessary.')
 
     def handle(self, *args, **options):
         domainname = options.get('domainname', None)
         displayname = options.get('displayname', None)
+        if not displayname:
+            displayname = domainname
+        if not domainname:
+            raise CommandError("You must specify --domainname.")
 
-        # We need both arguments to supress prompt.
-        if ( domainname and not displayname ) or ( not domainname and displayname ):
-            raise CommandError("You must use both --sitedomainname and --sitedisplayname.")
-
-        if domainname and displayname:
-            try:
-                is_valid_domainname(domainname)
-            except exceptions.ValidationError:
-                raise CommandError("Invalid domain name.")
-            try:
-                is_valid_displayname(displayname)
-            except exceptions.ValidationError:
-                raise CommandError("Invalid display name.")
+        try:
+            is_valid_domainname(domainname)
+        except exceptions.ValidationError:
+            raise CommandError("Invalid domain name.")
+        try:
+            is_valid_displayname(displayname)
+        except exceptions.ValidationError:
+            raise CommandError("Invalid display name.")
 
         from django.conf import settings
         sid = getattr(settings.SITE_ID, 1)
