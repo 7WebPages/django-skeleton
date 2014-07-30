@@ -17,3 +17,4 @@ django-crispy-forms
 django-picklefield
 django-storages
 django-allauth
+django-avatar
