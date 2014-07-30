@@ -142,6 +142,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    
+    'constance.context_processors.config',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
@@ -199,6 +201,8 @@ DJANGO_APPS = (
     'south',
     'pure_pagination',
     'crispy_forms',
+    'constance',
+    'constance.backends.database',
 )
 
 # DEBUG-specific apps
@@ -249,6 +253,9 @@ LOGGING = {
 ########## END LOGGING CONFIGURATION
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
 
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
