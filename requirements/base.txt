@@ -12,4 +12,6 @@ webtest
 django-webtest
 model_mommy
 django-crispy-forms
-django-constance[database]
+#django-constance use it after fix of https://github.com/comoga/django-constance/issues/51
+-e git+git://github.com/comoga/django-constance#egg=django-constance
+django-picklefield
