@@ -203,6 +203,7 @@ DJANGO_APPS = (
     'crispy_forms',
     'constance',
     'constance.backends.database',
+    'storages',
 )
 
 # DEBUG-specific apps
