@@ -55,7 +55,7 @@ class Command(BaseCommand):
             raise CommandError("Invalid display name.")
 
         from django.conf import settings
-        sid = getattr(settings.SITE_ID, 1)
+        sid = getattr(settings, 'SITE_ID', 1)
 
         #Use the existing site object, or create one with the SITE_ID.
         try:
