@@ -47,7 +47,7 @@ class Command(BaseCommand):
             secret=secret,
             key=key
         )
-        site = Site.objects.get(settings.SITE_ID)
+        site = Site.objects.get(pk=settings.SITE_ID)
         app.sites.add(site)
         app.save()
 
