@@ -16,3 +16,4 @@ django-crispy-forms
 -e git+git://github.com/comoga/django-constance#egg=django-constance
 django-picklefield
 django-storages
+django-allauth

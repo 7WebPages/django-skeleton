@@ -14,7 +14,7 @@ class Command(BaseCommand):
             help='Specifies application id.'),
         make_option('--secret', dest='secret', default=None,
             help='Specifies application secret.'),
-        make_option('--provider', dest='provider_name', default=None,
+        make_option('--provider', dest='provider', default=None,
             help='Specifies social authentication provider name.'),
         make_option('--key', dest='key', default=None,
             help='Specifies key. Optional'),
@@ -32,15 +32,17 @@ class Command(BaseCommand):
 
         client_id = options.get('client_id', None)
         secret = options.get('secret', None)
-        provider_name = options.get('provider_name', None)
+        provider = options.get('provider', None)
         key = options.get('key', '')
+        if not key:
+            key = ''
 
         # We need both arguments to supress prompt.
-        if not (client_id and secret and provider_name):
+        if not (client_id and secret and provider):
             raise CommandError("All arguments are required!")
         app = SocialApp.objects.create(
-            provider=provider_name,
-            name=provider_name,
+            provider=provider,
+            name=provider,
             client_id=client_id,
             secret=secret,
             key=key
