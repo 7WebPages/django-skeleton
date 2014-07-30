@@ -47,8 +47,7 @@ class Command(BaseCommand):
             secret=secret,
             key=key
         )
-        sid = getattr(settings.SITE_ID, 1)
-        site = Site.objects.get(id=sid)
+        site = Site.objects.get(settings.SITE_ID)
         app.sites.add(site)
         app.save()
 
