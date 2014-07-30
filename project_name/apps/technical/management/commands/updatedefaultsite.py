@@ -33,7 +33,7 @@ class Command(BaseCommand):
         make_option('--sitedisplayname', dest='displayname', default=None,
             help='Specifies the site display name.'),
     )
-    help = 'Used to create a default site. Provide both --sitedomainname and --sitedisplayname to suppress prompt. Remember double quoting display name if necessary.'
+    help = 'Used to create a default site. Provide both --sitedomainname and --sitedisplayname. Remember double quoting display name if necessary.'
 
     def handle(self, *args, **options):
         domainname = options.get('domainname', None)
