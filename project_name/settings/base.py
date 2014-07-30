@@ -266,8 +266,11 @@ SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
 
 # Apps specific for this project go here.
-from app import *
+from .app import LOCAL_APPS
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 ########## END APP CONFIGURATION
+
+# App settings have bigger priority
+from .app import *
