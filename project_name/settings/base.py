@@ -142,7 +142,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    
+
     'constance.context_processors.config',
 )
 
@@ -204,6 +204,9 @@ DJANGO_APPS = (
     'constance',
     'constance.backends.database',
     'storages',
+
+    # Technical app (to add management commands)
+    'technical',
 )
 
 # DEBUG-specific apps
