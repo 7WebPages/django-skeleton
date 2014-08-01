@@ -266,7 +266,53 @@ WSGI_APPLICATION = 'wsgi.application'
 SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
 
-# Apps specific for this project go here.
+########## AUTHORISATION/AUTHENTICATION CONFIGURATION
+# account-related apps
+DJANGO_APPS += (
+    'users',
+    'avatar',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+)
+
+# Allauth providers
+DJANGO_APPS += (
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.linkedin_oauth2',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.vk',
+)
+
+AUTH_USER_MODEL = 'users.User'
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+)
+
+# auth and allauth settings
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+########## END AUTHORISATION/AUTHENTICATION CONFIGURATION
+
+
+########## APP CONFIGURATION
 from .app import LOCAL_APPS
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -275,3 +321,4 @@ INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 
 # App settings have bigger priority
 from .app import *
+
