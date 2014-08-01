@@ -269,7 +269,6 @@ SOUTH_TESTS_MIGRATE = False
 ########## AUTHORISATION/AUTHENTICATION CONFIGURATION
 # account-related apps
 DJANGO_APPS += (
-    'users',
     'avatar',
     'allauth',
     'allauth.account',
@@ -285,8 +284,6 @@ DJANGO_APPS += (
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.vk',
 )
-
-AUTH_USER_MODEL = 'users.User'
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
