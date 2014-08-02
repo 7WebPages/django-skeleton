@@ -18,3 +18,4 @@ django-picklefield
 django-storages
 django-allauth
 django-avatar
+django-autoslug-field
