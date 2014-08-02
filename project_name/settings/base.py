@@ -298,6 +298,8 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     "allauth.socialaccount.context_processors.socialaccount",
 )
 
+DATE_FORMAT = 'Y-m-d'
+
 # auth and allauth settings
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
