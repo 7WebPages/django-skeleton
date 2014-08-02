@@ -204,6 +204,7 @@ DJANGO_APPS = (
     'constance',
     'constance.backends.database',
     'storages',
+    'django_autoslug',
 
     # Technical app (to add management commands)
     'technical',
