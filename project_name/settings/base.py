@@ -300,6 +300,9 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 )
 
 DATE_FORMAT = 'Y-m-d'
+SHORT_DATE_FORMAT = 'Y-m-d'
+DATETIME_FORMAT = 'Y-m-d H:M'
+SHORT_DATETIME_FORMAT = 'Y-m-d H:M'
 
 # auth and allauth settings
 LOGIN_REDIRECT_URL = '/'
