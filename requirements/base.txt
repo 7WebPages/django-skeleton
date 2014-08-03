@@ -20,3 +20,5 @@ django-allauth
 django-avatar
 django-autoslug-field
 django-autofixture
+django-filter
+git+https://github.com/fernandoPardo/django-enhanced-cbv
