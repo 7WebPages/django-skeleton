@@ -1,28 +1,17 @@
-{% load i18n %}
-<div class="pagination pagination-right">
-  <ul class="pull-left">
-      <li class="disabled"><span>{% trans "Showing:" %} {{ page_obj.start_index }}-{{ page_obj.end_index }} {% trans "of" %} {{ page_obj.paginator.count }}</span></li>
-  </ul>
-  <ul>
-    <li{% if not page_obj.has_previous %} class="disabled"{% endif %}>
-      {% if page_obj.has_previous %}
-      <a href="?{{ page_obj.previous_page_number.querystring }}">&larr;</a>
-      {% else %}
-      <a href="javascript:void(0)">&larr;</a>
-      {% endif %}
-    </li>
-    {% for page in page_obj.pages %}
-    {% if page %}
-    <li{% if page == page_obj.number %} class="active"{% endif %}><a href="?{{ page.querystring }}">{{ page }}</a></li>
-{#    {% else %}<li><a href="javascript:void(0)">&hellip;</a></li>#}
-    {% endif %}
-    {% endfor %}
-    <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
-      {% if page_obj.has_next %}
-      <a href="?{{ page_obj.next_page_number.querystring }}">&rarr;</a>
-      {% else %}
-      <a href="javascript:void(0)">&rarr;</a>
-      {% endif %}
-    </li>
-  </ul>
-</div>
+{% if is_paginated %}
+        <ul class="pagination pagination-centered">
+            {% if page_obj.has_previous %}
+                <li><a href="?page=1"><<</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}"><</a></li>
+            {% endif %}
+
+            {% for i in paginator.page_range %}
+                <li {% if page_obj.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">></a></li>
+                <li><a href="?page={{ page_obj.paginator.num_pages }}">>></a></li>
+            {% endif %}
+        </ul>
+{% endif %}
