@@ -1,27 +1,28 @@
-<div class="pager">
-   {% if has_previous %}
-      <span class="page">
-      <a href="?page={{ previous }}">&lt; Prev</a>
-      </span>
-   {% endif %}
-
-   {% if show_first %}
-      <span class="page"><a href="?page=1">1</a></span>
-      <span class="ellipsis">...</span>
-   {% endif %}
-   {% for linkpage in page_numbers %}
-      {% ifequal linkpage page %}
-         <span class="current">{{ page }}</span>
+{% load i18n %}
+<div class="pagination pagination-right">
+  <ul class="pull-left">
+      <li class="disabled"><span>{% trans "Showing:" %} {{ page_obj.start_index }}-{{ page_obj.end_index }} {% trans "of" %} {{ page_obj.paginator.count }}</span></li>
+  </ul>
+  <ul>
+    <li{% if not page_obj.has_previous %} class="disabled"{% endif %}>
+      {% if page_obj.has_previous %}
+      <a href="?{{ page_obj.previous_page_number.querystring }}">&larr;</a>
       {% else %}
-         <span class="page"><a href="?page={{ linkpage }}"
-               >{{ linkpage }}</a></span>
-      {% endifequal %}
-   {% endfor %}
-   {% if show_last %}
-      <span class="ellipsis">...</span>
-      <span class="page"><a href="?page=last">{{ pages }}</a></span>
-   {% endif %}
-   {% if has_next %}
-      <span class="page"><a href="?page={{ next }}">Next &gt;</a></span>
-   {% endif %}
+      <a href="javascript:void(0)">&larr;</a>
+      {% endif %}
+    </li>
+    {% for page in page_obj.pages %}
+    {% if page %}
+    <li{% if page == page_obj.number %} class="active"{% endif %}><a href="?{{ page.querystring }}">{{ page }}</a></li>
+{#    {% else %}<li><a href="javascript:void(0)">&hellip;</a></li>#}
+    {% endif %}
+    {% endfor %}
+    <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
+      {% if page_obj.has_next %}
+      <a href="?{{ page_obj.next_page_number.querystring }}">&rarr;</a>
+      {% else %}
+      <a href="javascript:void(0)">&rarr;</a>
+      {% endif %}
+    </li>
+  </ul>
 </div>
