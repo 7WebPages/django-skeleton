@@ -1,5 +1,10 @@
 /* Project specific Javascript goes here. */
 
 try{
-  setTimeout(function(){$.fn.select2.defaults.allowClear = true;}, 100)
+  setTimeout(function(){
+    if($ && $.fn && $.fn.select2){
+      $.fn.select2.defaults.allowClear = true;  
+    }
+  },
+  300)
 }catch(e){}
