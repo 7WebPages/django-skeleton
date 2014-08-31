@@ -22,3 +22,4 @@ django-autoslug-field
 django-autofixture
 django-filter
 git+https://github.com/fernandoPardo/django-enhanced-cbv
+django-select2
