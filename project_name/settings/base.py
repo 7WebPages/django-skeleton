@@ -206,6 +206,7 @@ DJANGO_APPS = (
     'storages',
     'django_autoslug',
     'autofixture',
+    'django_select2',
 
     # Technical app (to add management commands)
     'technical',
