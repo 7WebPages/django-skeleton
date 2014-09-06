@@ -10,7 +10,8 @@ django-extensions
 django-debug-toolbar
 webtest
 django-webtest
-model_mommy
+#model_mommy
+https://github.com/vandersonmota/model_mommy/archive/master.zip
 django-crispy-forms
 #django-constance use it after fix of https://github.com/comoga/django-constance/issues/51
 -e git+git://github.com/comoga/django-constance#egg=django-constance
