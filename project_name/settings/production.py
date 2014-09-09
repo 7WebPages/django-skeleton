@@ -6,7 +6,6 @@ from __future__ import absolute_import
 from os.path import join, normpath
 
 from .base import *
-from .secret import SECRET_KEY
 
 # Normally you should not import ANYTHING from Django directly
 # into your settings, but ImproperlyConfigured is an exception.
