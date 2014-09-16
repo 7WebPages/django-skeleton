@@ -14,6 +14,11 @@ img{
   line-height: 38px;
 }
 
+.search-block .form-actions{
+  display: inline-block;
+  vertical-align: bottom;
+}
+
 
 /* List view */
 
