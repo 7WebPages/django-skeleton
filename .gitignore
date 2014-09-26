@@ -1,6 +1,7 @@
 # Project-specific stuff
 # folder to serve static files
 assets
+media
 # file with secret information
 {{project_name}}/settings/secret.py
 
