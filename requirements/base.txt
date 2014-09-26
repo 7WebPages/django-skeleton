@@ -18,7 +18,8 @@ django-picklefield
 django-storages
 django-allauth
 django-avatar
-django-autoslug-field
+#django-autoslug-field
+https://github.com/yrik/django-autoslug-field/archive/patch-1.zip
 django-autofixture
 django-filter
 git+https://github.com/fernandoPardo/django-enhanced-cbv
