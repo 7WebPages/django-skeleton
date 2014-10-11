@@ -17,8 +17,10 @@ SITE_NAME = basename(DJANGO_ROOT)
 
 # Add our project to our pythonpath, this way we don't need to type our project
 # name in our dotted import paths:
-path.append(DJANGO_ROOT)
-path.append(join(DJANGO_ROOT, 'apps'))
+if DJANGO_ROOT not in path:
+    path.append(DJANGO_ROOT)
+if join(DJANGO_ROOT, 'apps') not in path:
+    path.append(join(DJANGO_ROOT, 'apps'))
 ########## END PATH CONFIGURATION
 
 
@@ -71,7 +73,7 @@ SITE_ID = 1
 USE_I18N = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
-USE_L10N = True
+USE_L10N = False
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
@@ -96,7 +98,7 @@ STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    normpath(join(SITE_ROOT, 'static')),
+    normpath(join(DJANGO_ROOT, 'static')),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -140,6 +142,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+
+    'constance.context_processors.config',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
@@ -150,7 +154,7 @@ TEMPLATE_LOADERS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
-    normpath(join(SITE_ROOT, 'templates')),
+    normpath(join(DJANGO_ROOT, 'templates')),
 )
 ########## END TEMPLATE CONFIGURATION
 
@@ -171,7 +175,7 @@ MIDDLEWARE_CLASSES = (
 
 ########## URL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
-ROOT_URLCONF = '%s.urls' % SITE_NAME
+ROOT_URLCONF = 'urls'
 ########## END URL CONFIGURATION
 
 
@@ -184,23 +188,25 @@ DJANGO_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Useful template tags:
-    # 'django.contrib.humanize',
-
-    # Admin panel and documentation:
+    'django.contrib.humanize',
     'django.contrib.admin',
-    # 'django.contrib.admindocs',
+
+    # Additional apps
+    'django_extensions',
     'pure_pagination',
+    'crispy_forms',
+    'constance',
+    'constance.backends.database',
+    'storages',
+    'autofixture',
+    'django_select2',
 )
 
-# Apps specific for this project go here.
-LOCAL_APPS = (
-)
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
-########## END APP CONFIGURATION
+# DEBUG-specific apps
+if DEBUG:
+    DJANGO_APPS += (
+        'debug_toolbar',
+    )
 
 
 ########## LOGGING CONFIGURATION
@@ -235,19 +241,79 @@ LOGGING = {
 }
 ########## END LOGGING CONFIGURATION
 
+CRISPY_TEMPLATE_PACK = "bootstrap3"
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
 
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
+WSGI_APPLICATION = 'wsgi.application'
 ########## END WSGI CONFIGURATION
 
 
 ########## SOUTH CONFIGURATION
 # See: http://south.readthedocs.org/en/latest/installation.html#configuring-your-django-installation
-INSTALLED_APPS += (
-    # Database migration helpers:
-    'south',
-)
+
 # Don't need to use South when setting up a test database.
 SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
+
+########## AUTHORISATION/AUTHENTICATION CONFIGURATION
+# account-related apps
+DJANGO_APPS += (
+    'avatar',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+)
+
+# Allauth providers
+DJANGO_APPS += (
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.linkedin_oauth2',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.vk',
+)
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+)
+
+DATE_FORMAT = 'Y-m-d'
+SHORT_DATE_FORMAT = 'Y-m-d'
+DATETIME_FORMAT = 'Y-m-d H:M'
+SHORT_DATETIME_FORMAT = 'Y-m-d H:M'
+
+# auth and allauth settings
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+########## END AUTHORISATION/AUTHENTICATION CONFIGURATION
+
+
+########## APP CONFIGURATION
+from .app import LOCAL_APPS
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+########## END APP CONFIGURATION
+
+# App settings have bigger priority
+from .app import *
+

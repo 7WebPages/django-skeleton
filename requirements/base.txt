@@ -1,7 +1,26 @@
-Django==1.6.5
+Django==1.7
 bpython==0.13
 django-braces==1.4.0
 django-model-utils==2.0.3
+django-pure-pagination==0.2.1
+Pygments==1.6
 logutils==0.3.3
-South==0.8.4
-django-pure-pagination
+django-extensions
+django-debug-toolbar
+webtest
+django-webtest
+#model_mommy
+https://github.com/vandersonmota/model_mommy/archive/master.zip
+django-crispy-forms
+#django-constance use it after fix of https://github.com/comoga/django-constance/issues/51
+-e git+git://github.com/comoga/django-constance#egg=django-constance
+django-picklefield
+django-storages
+django-allauth
+django-avatar
+django-autofixture
+django-filter
+git+https://github.com/fernandoPardo/django-enhanced-cbv
+https://github.com/yrik/django-allauth-multiple/archive/master.zip
+#django-select2 User after fix of https://github.com/applegrew/django-select2/issues/121
+git+git://github.com/maximzxc/django-select2.git@f637d4ec4971c1f0fecdf08ddb265163558f5adf#egg=django-select2

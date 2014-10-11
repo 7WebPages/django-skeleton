@@ -49,9 +49,10 @@ CACHES = {
 
 ########## TOOLBAR CONFIGURATION
 # See: http://django-debug-toolbar.readthedocs.org/en/latest/installation.html#explicit-setup
-INSTALLED_APPS += (
-    'debug_toolbar',
-)
+if 'debug_toolbar' not in INSTALLED_APPS:
+    INSTALLED_APPS += (
+        'debug_toolbar',
+    )
 
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
