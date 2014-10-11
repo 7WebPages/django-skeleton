@@ -21,5 +21,6 @@ django-avatar
 django-autofixture
 django-filter
 git+https://github.com/fernandoPardo/django-enhanced-cbv
-django-select2
 https://github.com/yrik/django-allauth-multiple/archive/master.zip
+#django-select2 User after fix of https://github.com/applegrew/django-select2/issues/121
+git+git://github.com/maximzxc/django-select2.git@f637d4ec4971c1f0fecdf08ddb265163558f5adf#egg=django-select2
